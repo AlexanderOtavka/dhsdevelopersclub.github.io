@@ -1,0 +1,92 @@
+<!--
+@license
+Copyright (C) 2015 Alexander Otavka.  All rights reserved.
+-->
+<!--
+animated-header.html
+
+@author Alexander Otavka (zotavka@gmail.com)
+-->
+
+<link rel="import" href="/bower_components/neon-animation/neon-animation-runner-behavior.html">
+<link rel="import" href="/bower_components/neon-animation/animations/slide-up-animation.html">
+<link rel="import" href="/bower_components/neon-animation/animations/slide-down-animation.html">
+
+<link rel="import" href="/bower_components/neon-animation/animations/fade-out-animation.html">
+<link rel="import" href="/bower_components/neon-animation/animations/fade-in-animation.html">
+
+<dom-module id="animated-header">
+  <style>
+    :host {
+      @apply(--layout-horizontal);
+
+      position: absolute;
+      width: 100%;
+      z-index: 500;
+
+      @apply(--gradient-bg-reversed);
+    }
+
+    :host.dark {
+      @apply(--gradient-bg-reversed-dark);
+    }
+  </style>
+  <template>
+    <content></content>
+  </template>
+  <script>
+    Polymer({
+      is: "animated-header",
+      behaviors: [
+        Polymer.NeonAnimationRunnerBehavior
+      ],
+      properties: {
+        visible: {
+          type: Boolean,
+          value: true
+        },
+        animationConfig: {
+          value: function() {
+            return {
+              "entry": {
+                name: "fade-out-animation",
+                node: this,
+                timing: {
+                  duration: 2000
+                }
+              },
+              "exit": {
+                name: "fade-in-animation",
+                node: this,
+                timing: {
+                  duration: 2000
+                }
+              }
+            }
+          }
+        }
+      },
+      listeners: {
+        "neon-animation-finish": "_onNeonAnimationFinish"
+      },
+
+      show: function() {
+        console.log("show");
+        this.visible = true;
+        this.style.display = "";
+        this.playAnimation("entry");
+      },
+      hide: function() {
+        console.log("hide");
+        this.visible = false;
+        this.playAnimation("exit");
+      },
+
+      _onNeonAnimationFinish: function() {
+        if (!this.visible) {
+          this.style.display = "none";
+        }
+      }
+    });
+  </script>
+</dom-module>

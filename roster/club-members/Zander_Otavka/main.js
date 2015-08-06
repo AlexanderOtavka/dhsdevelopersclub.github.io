@@ -7,6 +7,9 @@
   var header = document.querySelector("#header");
   var headerHeight = header.offsetHeight;
   var parallaxImages = document.querySelectorAll(".parallax-image");
+  var mainHeading = document.querySelector("#mainImage .section-title-text");
+  var mainHeadingOffset = mainHeading.offsetTop - headerHeight;
+  var mainHeadingHeight = mainImageEnd - mainHeadingOffset - headerHeight;
 
   parallaxContainer.addEventListener("scroll", SmoothA.updateHash);
   SmoothA.updateHash();
@@ -24,6 +27,9 @@
       }
     }
 
+    var headingScroll = (mainHeadingHeight - (scroll - mainHeadingOffset)) / mainHeadingHeight;
+    mainHeading.style.opacity = String(headingScroll);
+    
     var insideImage = false;
     for (var i = 0; i < parallaxImages.length; i++) {
       var imageTop = parallaxImages[i].offsetTop;
@@ -34,12 +40,12 @@
     }
 
     if (insideImage) {
-      if (header.classList.contains("hidden")) {
-        header.classList.remove("hidden")
+      if (!header.visible) {
+        // header.show();
       }
     } else {
-      if (!header.classList.contains("hidden")) {
-        header.classList.add("hidden")
+      if (header.visible) {
+        // header.hide();
       }
     }
   });

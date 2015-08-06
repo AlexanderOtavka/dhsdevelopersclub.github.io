@@ -67,24 +67,24 @@ body {
   /*font-family: 'Roboto', sans-serif;*/
 }
 
-#header {
+/*#header {
   @apply(--layout-horizontal);
 
   position: fixed;
   width: 100%;
-  z-index: 999;
+  z-index: 1;
 
   @apply(--gradient-bg-reversed);
 }
-
+*/
 #header.hidden {
   display: none;
 }
-
+/*
 #header.dark {
   @apply(--gradient-bg-reversed-dark);
 }
-
+*/
 #header .header-item {
   padding: var(--dimen-padding-desktop);
   font-size: 1.5rem;
@@ -97,17 +97,20 @@ body {
 
 #header a:hover {
   color: #ddd;
-  /*background: var(--color-light-grey-faded);*/
 }
 
 #header a:active {
   color: #bbb;
-  /*background: var(--color-light-grey-faded);*/
 }
 
 #headerTitle {
   @apply(--layout-flex);
   @apply(--layout-horizontal);
+}
+
+parallax-container {
+  position: relative;
+  z-index: 400;
 }
 
 .parallax-image {
@@ -164,7 +167,7 @@ body {
   padding: 0;
 }
 
-#mainHeading {
+#mainImage .heading {
   font-size: 4.5rem;
 }
 
@@ -177,6 +180,7 @@ body {
 
 .content-wrapper, .content-wrapper parallax-layer {
   position: relative;
+  z-index: 600;
   height: auto;
 }
 
