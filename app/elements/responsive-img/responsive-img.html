@@ -58,8 +58,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       var absolutePath = getAbsolutePath(newBaseSrc);
       if (IMAGE_INDEX.hasOwnProperty(absolutePath)) {
         var imageMetadata = IMAGE_INDEX[absolutePath];
-        this.src = newBaseSrc;
         this.srcset = getSrcset(newBaseSrc, imageMetadata.resolutions);
+        this.src = newBaseSrc;
 
         var re = /^(\d+)([vwhpx]+)$/;
 
